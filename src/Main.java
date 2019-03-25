@@ -8,6 +8,7 @@ public class Main {
         addEdge(root, new Node("closet"));
         addEdge(root, new Node("bedroom"));
         addEdge(root.getNeighbor("bedroom"), new Node("secret dungeon"));
+        addEdge(root, root.getNeighbor("bedroom").getNeighbor("secret dungeon"));
 
 
         //"game loop" where I get user input and move the player.
