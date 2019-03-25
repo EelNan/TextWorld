@@ -15,9 +15,6 @@ public class Node {
         return name;
     }
 
-    public ArrayList<Node> getNeighbors() {
-        return neighbors;
-    }
 
     public void addNeighbor(Node n){
         neighbors.add(n);
@@ -29,5 +26,14 @@ public class Node {
         }
 
         return null;
+    }
+
+    public String getNeighborNames(){
+        String output = "";
+
+        for (Node n : neighbors){
+            output += n.getName() + " ";
+        }
+        return output;
     }
 }
