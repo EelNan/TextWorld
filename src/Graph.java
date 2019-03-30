@@ -54,10 +54,12 @@ public class Graph {
         private String name;
         private String description;
         private ArrayList<Node> neighbors;
+        private ArrayList<Item> items;
 
         private Node(String name){
             this.name = name;
             neighbors = new ArrayList<>();
+            items = new ArrayList<>();
 
         }
         private Node(String name, String description){
@@ -101,6 +103,49 @@ public class Graph {
                 output += n.getName() + " ";
             }
             return output;
+        }
+
+        public ArrayList<Item> getItems() {
+            return items;
+        }
+
+        public String displayItems(){
+            String output = "";
+            for(Item i : items){
+                output = output + " " + i.getName();
+            }
+            return output;
+        }
+
+        public void addItem(Item i){
+            items.add(i);
+        }
+
+        public void addItem(String name){
+            items.add(new Item(name, "placeholder"));
+        }
+
+        public void addItem(String name, String description){
+            items.add(new Item(name, description));
+        }
+
+        public Item removeItem(String name){
+
+            for(Item i : items){
+                if(i.getName().equals(name)){
+                    items.remove(i);
+                    return i;
+                }
+            }
+            return null;
+        }
+
+        public boolean destroyItem(String name){
+            for(Item i : items){
+                if(i.getName().equals(name))
+                    return items.remove(i);
+            }
+            return false;
         }
     }
 }
