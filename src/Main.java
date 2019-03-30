@@ -48,16 +48,19 @@ public class Main {
                     System.out.println("you can't go to " + response + "try again");
                 }
             }
-            if(words[0].equals("look")){
+            if(response.equals("look")){
                 System.out.println(player.getCurrentRoom().getDescription());
                 if(player.getCurrentRoom().getItems().size() > 0)
-                    System.out.println("There are " + player.getCurrentRoom().displayItems() + " in this room");
+                    System.out.println("There are" + player.getCurrentRoom().displayItems() + " in this room");
+                else System.out.println("There are no items in this room");
             }
             if(words[0].equals("drop")){
                 drop(words, player);
             }
             if(words[0].equals("take")){
                 take(words, player);
+            }
+            if(words[0].equals("look")) {        //add specific things player can look at, like self, items, room, etc
             }
 
         }while(!response.equalsIgnoreCase("quit"));
@@ -72,6 +75,7 @@ public class Main {
             System.out.println("Describe yourself");
             description = userInput.nextLine();
             System.out.println("So you are " + name + ", and you consider yourself to be \"" + description + "\" Is this correct?");
+            response = userInput.nextLine();
         }while(!response.equals("yes"));
 
         return new Player(name, description);
@@ -108,7 +112,12 @@ public class Main {
             return;
         }
         currentRoom.addItem(player.removeItem(name));
+        System.out.println("You dropped a " + name);
 
+    }
+
+    private static void go(String[] words, Player player){
+        // attempt to move the player to desired location
     }
 
 }
