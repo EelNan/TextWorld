@@ -4,16 +4,19 @@ public class Main {
 
     public static void main(String[] args) {
         //build up a graph of connected nodes
-        Node root = new Node("hall");
-        addEdge(root, new Node("closet"));
-        addEdge(root, new Node("bedroom"));
-        addEdge(root.getNeighbor("bedroom"), new Node("secret dungeon"));
-        addEdge(root, root.getNeighbor("bedroom").getNeighbor("secret dungeon"));
-
+        Graph world = new Graph();
+        world.addNode("hall");
+        world.addNode("closet");
+        world.addNode("bedroom");
+        world.addNode("secret dungeon");
+        world.addUndirectedEdge("hall", "closet");
+        world.addUndirectedEdge("hall", "bedroom");
+        world.addUndirectedEdge("bedroom", "secret dungeon");
+        world.addUndirectedEdge("secret dungeon", "hall");
 
         //"game loop" where I get user input and move the player.
 
-        Node current = root;
+        Graph.Node current = world.getNode("hall");
 
 
         Scanner userInput = new Scanner(System.in);
@@ -25,20 +28,26 @@ public class Main {
             System.out.println("you can go to: " + current.getNeighborNames());
 
             //ask the player what type of action they want to take
-            System.out.println("You can \"talk\" or \"move\"");
+            System.out.println("You can talk, move, or look");
             response = userInput.nextLine();
-            if(response.equals("talk")){
+            String words[] = response.split(" ");
+            String firstWord = words[0];
+
+            if(words[0].equals("talk")){
                 TalkToPeople(userInput.nextLine());
             }
             if(response.equals("move")){
                 System.out.println("Where do you want to go?");
                 response = userInput.nextLine();
-                Node nextRoom = current.getNeighbor(response);
+                Graph.Node nextRoom = current.getNeighbor(response);
                 if(nextRoom == null){
                     System.out.println("you can't go to " + response + "try again");
                 }else{
                     current = nextRoom;
                 }
+            }
+            if(words[0].equals("look")){
+                System.out.println(current.getDescription());
             }
 
         }while(!response.equalsIgnoreCase("quit"));
@@ -48,8 +57,4 @@ public class Main {
         //currently a placeholder method
     }
 
-    public static void addEdge(Node first, Node next){
-        first.addNeighbor(next);
-        next.addNeighbor(first);
-    }
 }
