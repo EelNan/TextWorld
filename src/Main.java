@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
@@ -17,6 +19,17 @@ public class Main {
         //add items to certain rooms
         world.getNode("closet").addItem("coat");
         world.getNode("bedroom").addItem("key");
+
+        //add the creatures to the world
+        ArrayList<Chicken> chickens = new ArrayList<>(); //oh god this is a terrible way of saving them, save them to the node they are in
+        final int STARTCHICKENS = 10;
+        for(int i = 0; i < STARTCHICKENS; i++){
+
+            HashMap<String, Graph.Node> tempNodes = world.getNodes();
+            ArrayList<Graph.Node> nodes = new ArrayList<Graph.Node>(tempNodes.values());
+            int random = (int) (Math.random()*nodes.size());
+            chickens.add(new Chicken(nodes.get(random)));
+        }
 
         //"game loop" where I get user input and move the player.
 
@@ -49,10 +62,18 @@ public class Main {
                 }
             }
             if(response.equals("look")){
+
                 System.out.println(player.getCurrentRoom().getDescription());
-                if(player.getCurrentRoom().getItems().size() > 0)
+
+                if(player.getCurrentRoom().getItems().size() > 0) {
                     System.out.println("There are" + player.getCurrentRoom().displayItems() + " in this room");
-                else System.out.println("There are no items in this room");
+                } else System.out.println("There are no items in this room");
+
+                String chickensWithPlayer = getChickensInRoom(player.getCurrentRoom(), chickens);
+
+                if(chickensWithPlayer.length() > 0){
+                    System.out.println("You see" + getChickensInRoom(player.getCurrentRoom(), chickens) + " in the room");
+                }
             }
             if(words[0].equals("drop")){
                 drop(words, player);
@@ -60,11 +81,32 @@ public class Main {
             if(words[0].equals("take")){
                 take(words, player);
             }
-            if(words[0].equals("look")) {        //add specific things player can look at, like self, items, room, etc
+            if(words[0].equals("look") && !response.equals("look")) {        //add specific things player can look at, like self, items, room, etc
             }
+
+
+            //make everything else in the world do what they do
+            chickensAct(chickens);
 
         }while(!response.equalsIgnoreCase("quit"));
     }
+
+    private static String getChickensInRoom(Graph.Node room, ArrayList<Chicken> chickens) {
+        String output = "";
+        for(Chicken c : chickens){
+            if(c.getCurrentRoom().equals(room))
+                output = output + " " + c.getName();
+        }
+        return output;
+    }
+
+    private static void chickensAct(ArrayList<Chicken> chickens) {
+        for(Chicken c : chickens){
+            c.move();
+            //add movement detection information
+        }
+    }
+
 
     private static Player createNewPlayer(Scanner userInput) {
         String response= "";

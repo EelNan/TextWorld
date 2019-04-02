@@ -1,3 +1,4 @@
+import javax.xml.soap.Node;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,6 +16,10 @@ public class Graph {
 
     public void addNode(String name) {
         nodes.put(name, new Node(name));
+    }
+
+    public HashMap<String, Node> getNodes() {
+        return nodes;
     }
 
     public void addUndirectedEdge(String name1, String name2) {
@@ -103,6 +108,10 @@ public class Graph {
                 output += n.getName() + " ";
             }
             return output;
+        }
+
+        public ArrayList<Node> getNeighbors() {
+            return neighbors;
         }
 
         public ArrayList<Item> getItems() {
