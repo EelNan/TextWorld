@@ -85,6 +85,9 @@ public class Main {
             }
 
 
+            if(response.equals("cheese")){
+                System.out.println("You are now a god. woohoo");
+            }
             //make everything else in the world do what they do
             chickensAct(chickens);
 
