@@ -11,6 +11,12 @@ public abstract class Creature {
         return name;
     }
 
+    public Creature(Graph.Node currentRoom, String name, String description) {
+        this.currentRoom = currentRoom;
+        this.name = name;
+        this.description = description;
+    }
+
     public String getDescription() {
         return description;
     }

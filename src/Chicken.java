@@ -2,16 +2,10 @@ import java.util.ArrayList;
 
 public class Chicken extends Creature {
 
-    public Chicken(String name, String description, Graph.Node currentRoom) {
-        this.name = name;
-        this.description = description;
-        this.currentRoom = currentRoom;
-    }
+
 
     public Chicken(Graph.Node currentRoom){
-        this.name = "placeholder chicken name";
-        this.description = "a generic chicken";
-        this.currentRoom = currentRoom;
+        super(currentRoom, "placeholder chicken name","a generic chicken");
     }
 
     @Override
