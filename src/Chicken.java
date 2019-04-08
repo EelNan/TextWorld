@@ -15,10 +15,6 @@ public class Chicken extends Creature {
     }
 
     @Override
-    public void move(Graph.Node nextRoom) {
-        move();
-    }
-
     public void move(){
         ArrayList<Graph.Node> neighbors = currentRoom.getNeighbors();
         int random = (int)(Math.random() * neighbors.size());

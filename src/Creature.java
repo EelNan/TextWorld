@@ -27,5 +27,5 @@ public abstract class Creature {
         this.name = name;
     }
 
-    public abstract void move(Graph.Node nextRoom);
+    public abstract void move();
 }
