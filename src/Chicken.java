@@ -8,10 +8,15 @@ public class Chicken extends Creature {
         super(currentRoom, "placeholder chicken name","a generic chicken");
     }
 
-    @Override
+
     public void move(){
         ArrayList<Graph.Node> neighbors = currentRoom.getNeighbors();
         int random = (int)(Math.random() * neighbors.size());
-        currentRoom = currentRoom.getNeighbor(neighbors.get(random).getName());
+        move(currentRoom.getNeighbor(neighbors.get(random).getName()));
+    }
+
+    @Override
+    public void move(Graph.Node next, Graph.Node playerRoom) {
+        move(next);
     }
 }

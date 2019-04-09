@@ -21,15 +21,9 @@ public class Main {
         world.getNode("bedroom").addItem("key");
 
         //add the creatures to the world
-        ArrayList<Chicken> chickens = new ArrayList<>(); //oh god this is a terrible way of saving them, save them to the node they are in
+        ArrayList<Creature> creatures = new ArrayList<>(); //oh god this is a terrible way of saving them, save them to the node they are in
         final int STARTCHICKENS = 10;
-        for(int i = 0; i < STARTCHICKENS; i++){
-
-            HashMap<String, Graph.Node> tempNodes = world.getNodes();
-            ArrayList<Graph.Node> nodes = new ArrayList<Graph.Node>(tempNodes.values());
-            int random = (int) (Math.random()*nodes.size());
-            chickens.add(new Chicken(nodes.get(random)));
-        }
+        makeCreatures(creatures, 10, 10);
 
         //"game loop" where I get user input and move the player.
 
@@ -94,6 +88,10 @@ public class Main {
         }while(!response.equalsIgnoreCase("quit"));
     }
 
+    private static void makeCreatures(ArrayList<Creature> creatures, int chickenCount, int wumpusCount) {
+
+    }
+
     private static String getChickensInRoom(Graph.Node room, ArrayList<Chicken> chickens) {
         String output = "";
         for(Chicken c : chickens){
@@ -103,9 +101,9 @@ public class Main {
         return output;
     }
 
-    private static void chickensAct(ArrayList<Chicken> chickens) {
-        for(Chicken c : chickens){
-            c.move();
+    private static void creaturesAct(ArrayList<Creature> creatures, Player player) {
+        for(Creature c : creatures){
+            c.move(player.getCurrentRoom());
             //add movement detection information
         }
     }
@@ -128,7 +126,7 @@ public class Main {
     }
 
     private static void TalkToPeople(String nextLine) {
-        //currently a placeholder method
+        //currently a placeholder method for interplayer communication
     }
 
     private static void take(String[] words, Player player){
