@@ -33,9 +33,5 @@ public abstract class Creature {
         this.name = name;
     }
 
-    public void move(Graph.Node next){
-        currentRoom = next;
-    }
-
-    public abstract void move(Graph.Node next, Graph.Node playerRoom);
+    public abstract void move(Graph.Node playerRoom);
 }
