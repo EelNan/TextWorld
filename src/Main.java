@@ -89,13 +89,13 @@ public class Main {
 
     private static void makeCreatures(ArrayList<Creature> creatures, Graph world, int chickenCount, int wumpusCount) {
         for (int i = 0; i < chickenCount; i++) {
-            ArrayList<Graph.Node> allRooms = (ArrayList<Graph.Node>) world.getNodes().values();
+            ArrayList<Graph.Node> allRooms = new ArrayList<Graph.Node> (world.getNodes().values());
             int random = (int) (Math.random() * allRooms.size());
             Graph.Node randomRoom = allRooms.get(random);
             creatures.add(new Chicken(randomRoom));
         }
         for (int i = 0; i < wumpusCount; i++) {
-            ArrayList<Graph.Node> allRooms = (ArrayList<Graph.Node>) world.getNodes().values();
+            ArrayList<Graph.Node> allRooms = new ArrayList<Graph.Node> (world.getNodes().values());
             int random = (int) (Math.random() * allRooms.size());
             Graph.Node randomRoom = allRooms.get(random);
             creatures.add(new Wumpus(randomRoom));
