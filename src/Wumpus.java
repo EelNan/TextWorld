@@ -30,12 +30,17 @@ public class Wumpus extends Creature {
     private void randomMove(Graph.Node playerRoom, Graph.Node neighbor) {
         if (neighbor == null) return;
 
-        ArrayList<Graph.Node> neighbors = (ArrayList<Graph.Node>) currentRoom.getNeighbors().clone();
+        try{
+            ArrayList<Graph.Node> neighbors = (ArrayList<Graph.Node>) (currentRoom.getNeighbors().clone());
 
-        neighbors.remove(playerRoom);
-        neighbors.remove(neighbor);
-        int random = (int) (Math.random() * neighbors.size());
-        currentRoom = neighbors.get(random);
+            neighbors.remove(playerRoom);
+            neighbors.remove(neighbor);
+            int random = (int) (Math.random() * neighbors.size());
+            currentRoom = neighbors.get(random);
+        }catch(Exception e){
+
+        }
+
 
 
     }
